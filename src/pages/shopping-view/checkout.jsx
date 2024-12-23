@@ -68,7 +68,6 @@ function ShoppingCheckout() {
         addressId: currentSelectedAddress?._id,
         address: currentSelectedAddress?.address,
         city: currentSelectedAddress?.city,
-        // pincode: currentSelectedAddress?.pincode,
         phone: currentSelectedAddress?.phone,
         notes: currentSelectedAddress?.notes,
       },

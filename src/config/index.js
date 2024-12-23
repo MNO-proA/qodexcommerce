@@ -192,13 +192,6 @@ export const addressFormControls = [
     type: "text",
     placeholder: "Enter your city",
   },
-  // {
-  //   label: "Pincode",
-  //   name: "pincode",
-  //   componentType: "input",
-  //   type: "text",
-  //   placeholder: "Enter your pincode",
-  // },
   {
     label: "Phone",
     name: "phone",
