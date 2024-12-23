@@ -24,10 +24,10 @@ function ShoppingOrderDetailsView({ orderDetails }) {
             <p className="font-medium">Order Price</p>
             <Label>${orderDetails?.totalAmount}</Label>
           </div>
-          <div className="flex mt-2 items-center justify-between">
+          {/* <div className="flex mt-2 items-center justify-between">
             <p className="font-medium">Payment Gateway</p>
             <Label>{orderDetails?.paymentGateway}</Label>
-          </div>
+          </div> */}
           <div className="flex mt-2 items-center justify-between">
             <p className="font-medium">Paystack Transaction Ref</p>
             <Label>{orderDetails?.transactionRef}</Label>
@@ -36,7 +36,7 @@ function ShoppingOrderDetailsView({ orderDetails }) {
             <p className="font-medium">Payment ID</p>
             <Label>{orderDetails?.paymentId}</Label>
           </div>
-          <div className="flex mt-2 items-center justify-between">
+          {/* <div className="flex mt-2 items-center justify-between">
             <p className="font-medium">Paid At</p>
             <Label>{orderDetails?.paidAt}</Label>
           </div>
@@ -47,7 +47,7 @@ function ShoppingOrderDetailsView({ orderDetails }) {
           <div className="flex mt-2 items-center justify-between">
             <p className="font-medium">Paystack Gateway Response</p>
             <Label>{orderDetails?.gatewayResponse}</Label>
-          </div>
+          </div> */}
           <div className="flex mt-2 items-center justify-between">
             <p className="font-medium">Payment Status</p>
             <Label>{orderDetails?.paymentStatus}</Label>
