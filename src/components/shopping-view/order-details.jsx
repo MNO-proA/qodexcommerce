@@ -9,7 +9,7 @@ function ShoppingOrderDetailsView({ orderDetails }) {
   const { user } = useSelector((state) => state.auth);
 
   return (
-    <DialogContent className="sm:max-w-[600px]">
+    <DialogContent className="sm:max-w-[600px] max-h-[80vh] overflow-y-auto">
       <div className="grid gap-6">
         <div className="grid gap-2">
           <div className="flex mt-6 items-center justify-between">
@@ -24,10 +24,6 @@ function ShoppingOrderDetailsView({ orderDetails }) {
             <p className="font-medium">Order Price</p>
             <Label>${orderDetails?.totalAmount}</Label>
           </div>
-          {/* <div className="flex mt-2 items-center justify-between">
-            <p className="font-medium">Payment Gateway</p>
-            <Label>{orderDetails?.paymentGateway}</Label>
-          </div> */}
           <div className="flex mt-2 items-center justify-between">
             <p className="font-medium">Paystack Transaction Ref</p>
             <Label>{orderDetails?.transactionRef}</Label>
@@ -36,23 +32,10 @@ function ShoppingOrderDetailsView({ orderDetails }) {
             <p className="font-medium">Payment ID</p>
             <Label>{orderDetails?.paymentId}</Label>
           </div>
-          {/* <div className="flex mt-2 items-center justify-between">
-            <p className="font-medium">Paid At</p>
-            <Label>{orderDetails?.paidAt}</Label>
-          </div>
-          <div className="flex mt-2 items-center justify-between">
-            <p className="font-medium">Paystack Payment Method </p>
-            <Label>{orderDetails?.paymentMethod}</Label>
-          </div>
-          <div className="flex mt-2 items-center justify-between">
-            <p className="font-medium">Paystack Gateway Response</p>
-            <Label>{orderDetails?.gatewayResponse}</Label>
-          </div> */}
           <div className="flex mt-2 items-center justify-between">
             <p className="font-medium">Payment Status</p>
             <Label>{orderDetails?.paymentStatus}</Label>
           </div>
-
           <div className="flex mt-2 items-center justify-between">
             <p className="font-medium">Order Status</p>
             <Label>
@@ -77,7 +60,10 @@ function ShoppingOrderDetailsView({ orderDetails }) {
             <ul className="grid gap-3">
               {orderDetails?.cartItems && orderDetails?.cartItems.length > 0
                 ? orderDetails?.cartItems.map((item) => (
-                    <li className="flex items-center justify-between" key={item._id}>
+                    <li
+                      className="flex items-center justify-between"
+                      key={item._id}
+                    >
                       <span>Title: {item.title}</span>
                       <span>Quantity: {item.quantity}</span>
                       <span>Price: ${item.price}</span>
