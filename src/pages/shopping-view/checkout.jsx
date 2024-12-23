@@ -32,7 +32,7 @@ function ShoppingCheckout() {
         )
       : 0;
 
-  function handleInitiatePaypalPayment() {
+  function handleInitiatePaystackPayment() {
     if (cartItems.length === 0) {
       toast({
         title: "Your cart is empty. Please add items to proceed",
@@ -52,6 +52,7 @@ function ShoppingCheckout() {
 
     const orderData = {
       userId: user?.id,
+      userEmail: user?.email,
       cartId: cartItems?._id,
       cartItems: cartItems.items.map((singleCartItem) => ({
         productId: singleCartItem?.productId,
@@ -67,12 +68,12 @@ function ShoppingCheckout() {
         addressId: currentSelectedAddress?._id,
         address: currentSelectedAddress?.address,
         city: currentSelectedAddress?.city,
-        pincode: currentSelectedAddress?.pincode,
+        // pincode: currentSelectedAddress?.pincode,
         phone: currentSelectedAddress?.phone,
         notes: currentSelectedAddress?.notes,
       },
       orderStatus: "pending",
-      paymentMethod: "paypal",
+      paymentMethod: "paystack",
       paymentStatus: "pending",
       totalAmount: totalCartAmount,
       orderDate: new Date(),
@@ -82,8 +83,9 @@ function ShoppingCheckout() {
     };
 
     dispatch(createNewOrder(orderData)).then((data) => {
-      console.log(data, "sangam");
+      // console.log(data, "qodexcore");
       if (data?.payload?.success) {
+        console.log(data?.payload, "lambda");
         setIsPaymemntStart(true);
       } else {
         setIsPaymemntStart(false);
@@ -118,7 +120,7 @@ function ShoppingCheckout() {
             </div>
           </div>
           <div className="mt-4 w-full">
-            <Button className="w-full">
+            <Button className="w-full" onClick={handleInitiatePaystackPayment}> 
               {isPaymentStart
                 ? "Processing Paystack Payment..."
                 : "Checkout with Paystack"}

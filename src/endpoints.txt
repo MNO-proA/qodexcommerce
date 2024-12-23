@@ -22,3 +22,33 @@
    │                                                                            │
    └────────────────────────────────────────────────────────────────────────────┘
 
+
+
+
+
+dashboard: https://app.serverless.com/qodexcore/apps/qodexcore-ecommerce/qodexcore-ecommerce/prod/us-east-1
+endpoints:
+  ANY - https://m0jfvkwzvk.execute-api.us-east-1.amazonaws.com/api/shop/products/{proxy+}
+  ANY - https://m0jfvkwzvk.execute-api.us-east-1.amazonaws.com/api/shop/review/{proxy+}
+  ANY - https://m0jfvkwzvk.execute-api.us-east-1.amazonaws.com/api/shop/search/{proxy+}
+  ANY - https://m0jfvkwzvk.execute-api.us-east-1.amazonaws.com/api/shop/order/{proxy+}
+  ANY - https://m0jfvkwzvk.execute-api.us-east-1.amazonaws.com/api/shop/cart/{proxy+}
+  ANY - https://m0jfvkwzvk.execute-api.us-east-1.amazonaws.com/api/shop/address/{proxy+}
+  ANY - https://m0jfvkwzvk.execute-api.us-east-1.amazonaws.com/api/admin/products/{proxy+}
+  ANY - https://m0jfvkwzvk.execute-api.us-east-1.amazonaws.com/api/admin/orders/{proxy+}
+  ANY - https://m0jfvkwzvk.execute-api.us-east-1.amazonaws.com/api/auth/{proxy+}
+  ANY - https://m0jfvkwzvk.execute-api.us-east-1.amazonaws.com/api/common/feature/{proxy+}
+functions:
+  products: qodexcore-ecommerce-prod-products (6 MB)
+  reviews: qodexcore-ecommerce-prod-reviews (6 MB)
+  search: qodexcore-ecommerce-prod-search (6 MB)
+  orders: qodexcore-ecommerce-prod-orders (6 MB)
+  cart: qodexcore-ecommerce-prod-cart (6 MB)
+  address: qodexcore-ecommerce-prod-address (6 MB)
+  admin-products: qodexcore-ecommerce-prod-admin-products (6 MB)
+  admin-orders: qodexcore-ecommerce-prod-admin-orders (6 MB)
+  auth: qodexcore-ecommerce-prod-auth (6 MB)
+  features: qodexcore-ecommerce-prod-features (6 MB)
+
+
+

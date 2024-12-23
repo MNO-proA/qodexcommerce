@@ -1,3 +1,4 @@
+
 import { HousePlug, LogOut, Menu, ShoppingCart, UserCog } from "lucide-react";
 import {
   Link,
@@ -64,7 +65,7 @@ function MenuItems() {
   );
 }
 
-function HeaderRightContent() {
+function AuthenticatedContent() {
   const { user } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.shopCart);
   const [openCartSheet, setOpenCartSheet] = useState(false);
@@ -77,9 +78,7 @@ function HeaderRightContent() {
 
   useEffect(() => {
     dispatch(fetchCartItems(user?.id));
-  }, [dispatch]);
-
-  console.log(cartItems, "sangam");
+  }, [dispatch, user?.id]);
 
   return (
     <div className="flex lg:items-center lg:flex-row flex-col gap-4">
@@ -132,13 +131,34 @@ function HeaderRightContent() {
   );
 }
 
+function UnauthenticatedContent() {
+  const navigate = useNavigate();
+
+  return (
+    <div className="flex lg:items-center lg:flex-row flex-col gap-4">
+      <Button
+        onClick={() => navigate("/auth/login")}
+        variant="outline"
+      >
+        Login
+      </Button>
+      {/* <Button
+        onClick={() => navigate("/admin/dashboard")}
+        variant="outline"
+      >
+        Admin
+      </Button> */}
+    </div>
+  );
+}
+
 function ShoppingHeader() {
   const { isAuthenticated } = useSelector((state) => state.auth);
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background">
       <div className="flex h-16 items-center justify-between px-4 md:px-6">
-        <Link to="/shop/home" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2">
           <HousePlug className="h-6 w-6" />
           <span className="font-bold">Ecommerce</span>
         </Link>
@@ -151,7 +171,7 @@ function ShoppingHeader() {
           </SheetTrigger>
           <SheetContent side="left" className="w-full max-w-xs">
             <MenuItems />
-            <HeaderRightContent />
+            {isAuthenticated ? <AuthenticatedContent /> : <UnauthenticatedContent />}
           </SheetContent>
         </Sheet>
         <div className="hidden lg:block">
@@ -159,7 +179,7 @@ function ShoppingHeader() {
         </div>
 
         <div className="hidden lg:block">
-          <HeaderRightContent />
+          {isAuthenticated ? <AuthenticatedContent /> : <UnauthenticatedContent />}
         </div>
       </div>
     </header>

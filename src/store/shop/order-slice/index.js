@@ -23,12 +23,12 @@ export const createNewOrder = createAsyncThunk(
 
 export const capturePayment = createAsyncThunk(
   "/order/capturePayment",
-  async ({ paymentId, payerId, orderId }) => {
+  async ({ transactionRef, reference, orderId }) => {
     const response = await axios.post(
       `${import.meta.env.VITE_SHOP_ORDER_API_URL}/capture`,
       {
-        paymentId,
-        payerId,
+        transactionRef,
+        reference,
         orderId,
       }
     );
@@ -74,7 +74,7 @@ const shoppingOrderSlice = createSlice({
       })
       .addCase(createNewOrder.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.approvalURL = action.payload.approvalURL;
+        state.approvalURL = action.payload.authorization_url;
         state.orderId = action.payload.orderId;
         sessionStorage.setItem(
           "currentOrderId",

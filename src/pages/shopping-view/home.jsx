@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
-import bannerOne from "../../assets/banner-1.webp";
-import bannerTwo from "../../assets/banner-2.webp";
-import bannerThree from "../../assets/banner-3.webp";
+// import bannerOne from "../../assets/banner-1.webp";
+// import bannerTwo from "../../assets/banner-2.webp";
+// import bannerThree from "../../assets/banner-3.webp";
 import {
   Airplay,
   BabyIcon,
@@ -32,21 +32,18 @@ import ProductDetailsDialog from "@/components/shopping-view/product-details";
 import { getFeatureImages } from "@/store/common-slice";
 
 const categoriesWithIcon = [
-  { id: "men", label: "Men", icon: ShirtIcon },
-  { id: "women", label: "Women", icon: CloudLightning },
-  { id: "kids", label: "Kids", icon: BabyIcon },
+  { id: "beauty", label: "Beauty", icon: ShoppingBasket},
   { id: "accessories", label: "Accessories", icon: WatchIcon },
-  { id: "footwear", label: "Footwear", icon: UmbrellaIcon },
 ];
 
-const brandsWithIcon = [
-  { id: "nike", label: "Nike", icon: Shirt },
-  { id: "adidas", label: "Adidas", icon: WashingMachine },
-  { id: "puma", label: "Puma", icon: ShoppingBasket },
-  { id: "levi", label: "Levi's", icon: Airplay },
-  { id: "zara", label: "Zara", icon: Images },
-  { id: "h&m", label: "H&M", icon: Heater },
-];
+// const brandsWithIcon = [
+//   { id: "nike", label: "Nike", icon: Shirt },
+//   { id: "adidas", label: "Adidas", icon: WashingMachine },
+//   { id: "puma", label: "Puma", icon: ShoppingBasket },
+//   { id: "levi", label: "Levi's", icon: Airplay },
+//   { id: "zara", label: "Zara", icon: Images },
+//   { id: "h&m", label: "H&M", icon: Heater },
+// ];
 function ShoppingHome() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const { productList, productDetails } = useSelector(
@@ -69,7 +66,7 @@ function ShoppingHome() {
     };
 
     sessionStorage.setItem("filters", JSON.stringify(currentFilter));
-    navigate(`/shop/listing`);
+    navigate(`/listing`);
   }
 
   function handleGetProductDetails(getCurrentProductId) {
@@ -161,14 +158,16 @@ function ShoppingHome() {
           <ChevronRightIcon className="w-4 h-4" />
         </Button>
       </div>
-      <section className="py-12 bg-gray-50">
+      {/* <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">
             Shop by category
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {/* <div className="flex items-center justify-center"> 
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {categoriesWithIcon.map((categoryItem) => (
               <Card
+                key={categoryItem.id}
                 onClick={() =>
                   handleNavigateToListingPage(categoryItem, "category")
                 }
@@ -180,16 +179,101 @@ function ShoppingHome() {
                 </CardContent>
               </Card>
             ))}
-          </div>
+            </div>
+          </div> 
+          {/* <div className="flex items-center justify-center w-full px-4">
+  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-6xl w-full justify-items-center">
+    {categoriesWithIcon.map((categoryItem) => (
+      <Card
+        key={categoryItem.id}
+        onClick={() =>
+          handleNavigateToListingPage(categoryItem, "category")
+        }
+        className="cursor-pointer hover:shadow-lg transition-shadow w-full max-w-[240px]"
+      >
+        <CardContent className="flex flex-col items-center justify-center p-6">
+          <categoryItem.icon className="w-12 h-12 mb-4 text-primary" />
+          <span className="font-bold">{categoryItem.label}</span>
+        </CardContent>
+      </Card>
+    ))}
+  </div>
+</div> 
+          <div className="container mx-auto px-4">
+  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 place-items-center max-w-[1200px] mx-auto">
+    {categoriesWithIcon.map((categoryItem) => (
+      <Card
+        key={categoryItem.id}
+        onClick={() =>
+          handleNavigateToListingPage(categoryItem, "category")
+        }
+        className="cursor-pointer hover:shadow-lg transition-shadow w-full max-w-[200px]"
+      >
+        <CardContent className="flex flex-col items-center justify-center p-6">
+          <categoryItem.icon className="w-12 h-12 mb-4 text-primary" />
+          <span className="font-bold">{categoryItem.label}</span>
+        </CardContent>
+      </Card>
+    ))}
+  </div>
+</div>
+         
         </div>
-      </section>
+      </section> */}
+      {/* <section className="py-12 bg-gray-50">
+  <div className="container mx-auto px-4">
+    <h2 className="text-3xl font-bold text-center mb-8">
+      Shop by category
+    </h2>
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 place-items-center max-w-[1200px] mx-auto">
+      {categoriesWithIcon.map((categoryItem) => (
+        <Card
+          key={categoryItem.id}
+          onClick={() =>
+            handleNavigateToListingPage(categoryItem, "category")
+          }
+          className="cursor-pointer hover:shadow-lg transition-shadow w-full max-w-[200px]"
+        >
+          <CardContent className="flex flex-col items-center justify-center p-6">
+            <categoryItem.icon className="w-12 h-12 mb-4 text-primary" />
+            <span className="font-bold">{categoryItem.label}</span>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  </div>
+</section> */}
+<section className="py-12 bg-gray-50">
+  <div className="container mx-auto px-4">
+    <h2 className="text-3xl font-bold text-center mb-8">
+      Shop by category
+    </h2>
+    <div className="flex justify-center gap-4">
+      {categoriesWithIcon.map((categoryItem) => (
+        <Card
+          key={categoryItem.id}
+          onClick={() =>
+            handleNavigateToListingPage(categoryItem, "category")
+          }
+          className="cursor-pointer hover:shadow-lg transition-shadow w-[240px]"
+        >
+          <CardContent className="flex flex-col items-center justify-center p-6">
+            <categoryItem.icon className="w-12 h-12 mb-4 text-primary" />
+            <span className="font-bold">{categoryItem.label}</span>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  </div>
+</section>
 
       <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8">Shop by Brand</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          {/* <h2 className="text-3xl font-bold text-center mb-8">Shop by Brand</h2> */}
+          {/* <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {brandsWithIcon.map((brandItem) => (
               <Card
+                key={brandItem.id}
                 onClick={() => handleNavigateToListingPage(brandItem, "brand")}
                 className="cursor-pointer hover:shadow-lg transition-shadow"
               >
@@ -199,7 +283,7 @@ function ShoppingHome() {
                 </CardContent>
               </Card>
             ))}
-          </div>
+          </div> */}
         </div>
       </section>
 
@@ -212,6 +296,7 @@ function ShoppingHome() {
             {productList && productList.length > 0
               ? productList.map((productItem) => (
                   <ShoppingProductTile
+                    key={productItem._id}
                     handleGetProductDetails={handleGetProductDetails}
                     product={productItem}
                     handleAddtoCart={handleAddtoCart}

@@ -16,7 +16,7 @@ const initialAddressFormData = {
   address: "",
   city: "",
   phone: "",
-  pincode: "",
+  // pincode: "",
   notes: "",
 };
 
@@ -94,7 +94,7 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
       address: getCuurentAddress?.address,
       city: getCuurentAddress?.city,
       phone: getCuurentAddress?.phone,
-      pincode: getCuurentAddress?.pincode,
+      // pincode: getCuurentAddress?.pincode,
       notes: getCuurentAddress?.notes,
     });
   }
