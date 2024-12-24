@@ -25,7 +25,7 @@ function PaystackReturnPage() {
             console.log("paystack data confirmed: ", data?.payload?.success)
             if (data?.payload?.success) {
               sessionStorage.removeItem("currentOrderId");
-              window.location.href = "/shop/payment-success";
+              window.location.href = "/payment-success";
             }
           });
 
