@@ -92,8 +92,11 @@ function ShoppingCheckout() {
     });
   }
 
+  // if (approvalURL) {
+  //   window.location.href = approvalURL;
+  // }
   if (approvalURL) {
-    window.location.href = approvalURL;
+    window.open(approvalURL, "_blank");
   }
 
   return (
@@ -119,7 +122,7 @@ function ShoppingCheckout() {
             </div>
           </div>
           <div className="mt-4 w-full">
-            <Button className="w-full" onClick={handleInitiatePaystackPayment}> 
+            <Button className="w-full" onClick={handleInitiatePaystackPayment}>
               {isPaymentStart
                 ? "Processing Paystack Payment..."
                 : "Checkout with Paystack"}
