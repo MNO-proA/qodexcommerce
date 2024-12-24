@@ -92,12 +92,12 @@ function ShoppingCheckout() {
     });
   }
 
-  // if (approvalURL) {
-  //   window.location.href = approvalURL;
-  // }
   if (approvalURL) {
-    window.open(approvalURL, "_blank");
+    window.location.href = approvalURL;
   }
+  // if (approvalURL) {
+  //   window.open(approvalURL, "_blank");
+  // }
 
   return (
     <div className="flex flex-col">
