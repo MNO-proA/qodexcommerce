@@ -62,7 +62,7 @@ function App() {
         >
           <Route path="checkout" element={<ShoppingCheckout />} />
           <Route path="account" element={<ShoppingAccount />} />
-          {/* <Route path="payment-success" element={<PaymentSuccessPage />} /> */}
+          <Route path="payment-success" element={<PaymentSuccessPage />} />
         </Route>
 
         {/* Protected Admin Routes */}
@@ -81,7 +81,7 @@ function App() {
         </Route>
 
         {/* Other Routes */}
-        <Route path="payment-success" element={<PaymentSuccessPage />} />
+        {/* <Route path="payment-success" element={<PaymentSuccessPage />} /> */}
         <Route path="paystack-return" element={<PaystackReturnPage />} />
         <Route path="/unauth-page" element={<UnauthPage />} />
         <Route path="*" element={<NotFound />} />

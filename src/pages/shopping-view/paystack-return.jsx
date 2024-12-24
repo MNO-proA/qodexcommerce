@@ -2,7 +2,8 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { capturePayment } from "@/store/shop/order-slice";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+
 
 
 function PaystackReturnPage() {
@@ -11,6 +12,7 @@ function PaystackReturnPage() {
   const params = new URLSearchParams(location.search);
   const transactionRef = params.get("trxref");
   const reference = params.get("reference");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (transactionRef && reference) {
@@ -25,7 +27,7 @@ function PaystackReturnPage() {
             console.log("paystack data confirmed: ", data?.payload?.success)
             if (data?.payload?.success) {
               sessionStorage.removeItem("currentOrderId");
-              window.location.href = "/payment-success";
+              navigate("/shop/payment-success") ;
             }
           });
 
@@ -37,7 +39,7 @@ function PaystackReturnPage() {
 
       return () => clearTimeout(timeoutId); // Cleanup on unmount
     }
-  }, [transactionRef, reference, dispatch]);
+  }, [transactionRef, reference, dispatch, navigate ]);
 
 
 
