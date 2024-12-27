@@ -1,56 +1,56 @@
-// import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-// import { capturePayment } from "@/store/shop/order-slice";
-// import { useEffect } from "react";
-// import { useDispatch } from "react-redux";
-// import { useLocation } from "react-router-dom";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { capturePayment } from "@/store/shop/order-slice";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 
-// function PaystackReturnPage() {
-//   const dispatch = useDispatch();
-//   const location = useLocation();
-//   const params = new URLSearchParams(location.search);
-//   const transactionRef = params.get("trxref");
-//   const reference = params.get("reference");
+function PaystackReturnPage() {
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const transactionRef = params.get("trxref");
+  const reference = params.get("reference");
 
-//   useEffect(() => {
-//     if (transactionRef && reference) {
-//       const orderId = JSON.parse(sessionStorage.getItem("currentOrderId"));
-//       console.log("wait for 10s for paystack data to be saved on the backend");
+  useEffect(() => {
+    if (transactionRef && reference) {
+      const orderId = JSON.parse(sessionStorage.getItem("currentOrderId"));
+      console.log("wait for 10s for paystack data to be saved on the backend");
 
-//       const timeoutId = setTimeout(async () => {
-//         try {
-//           console.log("checking paystack data to save order....")
+      const timeoutId = setTimeout(async () => {
+        try {
+          console.log("checking paystack data to save order....")
 
-//           dispatch(capturePayment({ transactionRef, reference, orderId })).then((data) => {
-//             console.log("paystack data confirmed: ", data?.payload?.success)
-//             if (data?.payload?.success) {
-//               sessionStorage.removeItem("currentOrderId");
-//               window.location.replace("/shop/payment-success");
-//             }
-//           });
+          dispatch(capturePayment({ transactionRef, reference, orderId })).then((data) => {
+            console.log("paystack data confirmed: ", data?.payload?.success)
+            if (data?.payload?.success) {
+              sessionStorage.removeItem("currentOrderId");
+              window.location.replace("/shop/payment-success");
+            }
+          });
 
-//           console.log("Redirecting....");
-//         } catch (error) {
-//           console.error("Error checking Paystack data:", error);
-//         }
-//       }, 10000);
+          console.log("Redirecting....");
+        } catch (error) {
+          console.error("Error checking Paystack data:", error);
+        }
+      }, 10000);
 
-//       return () => clearTimeout(timeoutId); // Cleanup on unmount
-//     }
-//   }, [transactionRef, reference, dispatch]);
+      return () => clearTimeout(timeoutId); // Cleanup on unmount
+    }
+  }, [transactionRef, reference, dispatch]);
 
 
 
-//   return (
-//     <Card>
-//       <CardHeader>
-//         <CardTitle>Processing Payment...Please wait!</CardTitle>
-//       </CardHeader>
-//     </Card>
-//   );
-// }
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Processing Payment...Please wait!</CardTitle>
+      </CardHeader>
+    </Card>
+  );
+}
 
-// export default PaystackReturnPage;
+export default PaystackReturnPage;
 
 
 // import { Card, CardHeader, CardTitle } from "@/components/ui/card";
@@ -182,53 +182,53 @@
 // export default PaystackReturnPage;
 
 
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { capturePayment } from "@/store/shop/order-slice";
-import { checkAuth } from "@/store/auth-slice";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+// import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+// import { capturePayment } from "@/store/shop/order-slice";
+// import { checkAuth } from "@/store/auth-slice";
+// import { useEffect } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import { useLocation } from "react-router-dom";
 
-function PaystackReturnPage() {
-  const dispatch = useDispatch();
-  const location = useLocation();
-  const { isAuthenticated } = useSelector((state) => state.auth);
-  const params = new URLSearchParams(location.search);
-  const transactionRef = params.get("trxref");
-  const reference = params.get("reference");
+// function PaystackReturnPage() {
+//   const dispatch = useDispatch();
+//   const location = useLocation();
+//   const { isAuthenticated } = useSelector((state) => state.auth);
+//   const params = new URLSearchParams(location.search);
+//   const transactionRef = params.get("trxref");
+//   const reference = params.get("reference");
 
-  useEffect(() => {
-    // Verify auth state before timeout
-    dispatch(checkAuth());
+//   useEffect(() => {
+//     // Verify auth state before timeout
+//     dispatch(checkAuth());
 
-    if (transactionRef && reference) {
-      const orderId = JSON.parse(sessionStorage.getItem("currentOrderId"));
+//     if (transactionRef && reference) {
+//       const orderId = JSON.parse(sessionStorage.getItem("currentOrderId"));
 
-      const timeoutId = setTimeout(async () => {
-        // Recheck auth before capture
-        await dispatch(checkAuth());
+//       const timeoutId = setTimeout(async () => {
+//         // Recheck auth before capture
+//         await dispatch(checkAuth());
         
-        if (isAuthenticated) {
-          const result = await dispatch(capturePayment({ transactionRef, reference, orderId }));
-          if (result?.payload?.success) {
-            sessionStorage.removeItem("currentOrderId");
-            // Use navigate instead of location.replace
-            window.location.href = "/shop/payment-success";
-          }
-        }
-      }, 10000);
+//         if (isAuthenticated) {
+//           const result = await dispatch(capturePayment({ transactionRef, reference, orderId }));
+//           if (result?.payload?.success) {
+//             sessionStorage.removeItem("currentOrderId");
+//             // Use navigate instead of location.replace
+//             window.location.href = "/shop/payment-success";
+//           }
+//         }
+//       }, 10000);
 
-      return () => clearTimeout(timeoutId);
-    }
-  }, [transactionRef, reference, dispatch, isAuthenticated]);
+//       return () => clearTimeout(timeoutId);
+//     }
+//   }, [transactionRef, reference, dispatch, isAuthenticated]);
 
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Processing Payment...Please wait!</CardTitle>
-      </CardHeader>
-    </Card>
-  );
-}
+//   return (
+//     <Card>
+//       <CardHeader>
+//         <CardTitle>Processing Payment...Please wait!</CardTitle>
+//       </CardHeader>
+//     </Card>
+//   );
+// }
 
-export default PaystackReturnPage;
+// export default PaystackReturnPage;
