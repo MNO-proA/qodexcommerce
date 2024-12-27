@@ -20,6 +20,7 @@ function AuthLogin() {
   // const { user, isAuthenticated } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
+
   function onSubmit(event) {
     event.preventDefault();
 
@@ -29,13 +30,14 @@ function AuthLogin() {
       if (data?.payload?.success) {
         if (user?.role !== "admin") {
            const savedAction = sessionStorage.getItem('intendedAction');
-        // console.log(savedAction)
+  
             if (savedAction) {
               const { productId, redirectPath } = JSON.parse(savedAction);
               // console.log(productId, redirectPath)
               // console.log(user)
               // console.log(addToCart)
               // console.log(fetchCartItems)
+             
 
               dispatch(
                 addToCart({
@@ -48,17 +50,19 @@ function AuthLogin() {
                   dispatch(fetchCartItems(user?.id));
                   toast({
                     title: "Product is added to cart",
+                    // style: {
+                    //   backgroundColor: "#1c3f24",
+                    //   color: "white", 
+                    // },
                   });
-                  // Clear the saved action
+               
                   sessionStorage.removeItem('intendedAction');
-                  // Redirect back to the original location
+              
                   navigate(redirectPath);
                 }
               });
             } else {
-                // if (user?.role === "admin") {
-                //   return navigate("/admin/dashboard")
-                // }
+              
                 return navigate("/")
             }
         } else {
@@ -76,7 +80,6 @@ function AuthLogin() {
       }
     });
   }
-
 
   return (
     <div className="mx-auto w-full max-w-md space-y-6">

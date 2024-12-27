@@ -4,6 +4,8 @@ import axios from "axios";
 const initialState = {
   isLoading: false,
   addressList: [],
+  loadingAddressId: null,
+  loadingType: null, 
 };
 
 export const addNewAddress = createAsyncThunk(
@@ -58,14 +60,59 @@ const addressSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(addNewAddress.pending, (state) => {
+      .addCase(addNewAddress.pending, (state, action) => {
         state.isLoading = true;
+        state.loadingAddressId = action.meta.arg.addressId;
       })
-      .addCase(addNewAddress.fulfilled, (state, action) => {
+      .addCase(addNewAddress.fulfilled, (state) => {
         state.isLoading = false;
+        state.loadingAddressId = null;
       })
       .addCase(addNewAddress.rejected, (state) => {
         state.isLoading = false;
+        state.loadingAddressId = null;
+      })
+      // .addCase(editaAddress.pending, (state, action) => {
+      //   state.isLoading = true;
+      //   state.loadingAddressId = action.meta.arg.addressId;
+      // })
+      // .addCase(editaAddress.fulfilled, (state) => {
+      //   state.isLoading = false;
+      //   state.loadingAddressId = null;
+      // })
+      // .addCase(editaAddress.rejected, (state) => {
+      //   state.isLoading = false;
+      //   state.loadingAddressId = null;
+      // })
+      .addCase(editaAddress.pending, (state, action) => {
+        state.isLoading = true;
+        state.loadingAddressId = action.meta.arg.addressId;
+        state.loadingType = 'edit';
+      })
+      .addCase(editaAddress.fulfilled, (state) => {
+        state.isLoading = false;
+        state.loadingAddressId = null;
+        state.loadingType = null;
+      })
+      .addCase(editaAddress.rejected, (state) => {
+        state.isLoading = false;
+        state.loadingAddressId = null;
+        state.loadingType = null;
+      })
+      .addCase(deleteAddress.pending, (state, action) => {
+        state.isLoading = true;
+        state.loadingAddressId = action.meta.arg.addressId;
+        state.loadingType = 'delete';
+      })
+      .addCase(deleteAddress.fulfilled, (state) => {
+        state.isLoading = false;
+        state.loadingAddressId = null;
+        state.loadingType = null;
+      })
+      .addCase(deleteAddress.rejected, (state) => {
+        state.isLoading = false;
+        state.loadingAddressId = null;
+        state.loadingType = null;
       })
       .addCase(fetchAllAddresses.pending, (state) => {
         state.isLoading = true;

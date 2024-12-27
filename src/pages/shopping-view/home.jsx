@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Button } from "@/components/ui/button";
 // import bannerOne from "../../assets/banner-1.webp";
 // import bannerTwo from "../../assets/banner-2.webp";
@@ -30,6 +31,9 @@ import { addToCart, fetchCartItems } from "@/store/shop/cart-slice";
 import { useToast } from "@/components/ui/use-toast";
 import ProductDetailsDialog from "@/components/shopping-view/product-details";
 import { getFeatureImages } from "@/store/common-slice";
+import MobileNavigation from "@/components/shopping-view/MobileNavigation";
+import CategorySection from "@/components/shopping-view/CategorySection";
+
 
 const categoriesWithIcon = [
   { id: "beauty", label: "Beauty", icon: ShoppingBasket },
@@ -54,6 +58,7 @@ function ShoppingHome() {
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
 
   const { user } = useSelector((state) => state.auth);
+  
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -117,10 +122,69 @@ function ShoppingHome() {
     dispatch(getFeatureImages());
   }, [dispatch]);
 
-  return (
-    <div className="flex flex-col min-h-screen">
-    
+  //   return (
+  //     <div className="flex flex-col min-h-screen">
 
+  <div className="relative w-full aspect-[16/9] sm:h-[600px] overflow-hidden">
+    {featureImageList && featureImageList.length > 0
+      ? featureImageList.map((slide, index) => (
+          <img
+            src={slide?.image}
+            key={index}
+            loading="lazy"
+            alt={`Slide ${index + 1}`}
+            className={`${
+              index === currentSlide
+                ? "opacity-100 scale-100"
+                : "opacity-0 scale-95"
+            } absolute top-0 left-0 w-full h-full object-cover transition-all duration-1000 ease-in-out`}
+          />
+        ))
+      : null}
+
+    {/* Previous Button */}
+    <button
+      onClick={() =>
+        setCurrentSlide(
+          (prevSlide) =>
+            (prevSlide - 1 + featureImageList.length) % featureImageList.length
+        )
+      }
+      className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white/70 p-2 rounded-full shadow hover:bg-white hover:scale-105 transition sm:p-3 sm:left-6"
+    >
+      <ChevronLeftIcon className="w-5 h-5 sm:w-7 sm:h-7 text-gray-700" />
+    </button>
+
+    {/* Next Button */}
+    <button
+      onClick={() =>
+        setCurrentSlide(
+          (prevSlide) => (prevSlide + 1) % featureImageList.length
+        )
+      }
+      className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white/70 p-2 rounded-full shadow hover:bg-white hover:scale-105 transition sm:p-3 sm:right-6"
+    >
+      <ChevronRightIcon className="w-5 h-5 sm:w-7 sm:h-7 text-gray-700" />
+    </button>
+
+    {/* Slide Indicators */}
+    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+      {featureImageList.map((_, index) => (
+        <div
+          key={index}
+          className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${
+            index === currentSlide ? "bg-gray-700" : "bg-gray-300"
+          } transition-all duration-300`}
+          onClick={() => setCurrentSlide(index)}
+        />
+      ))}
+    </div>
+  </div>;
+
+  return (
+    <div className="flex flex-col min-h-screen pb-16 md:pb-0">
+      {" "}
+      {/* Added padding bottom for mobile nav */}
       <div className="relative w-full aspect-[16/9] sm:h-[600px] overflow-hidden">
         {featureImageList && featureImageList.length > 0
           ? featureImageList.map((slide, index) => (
@@ -178,36 +242,13 @@ function ShoppingHome() {
         </div>
       </div>
 
-      <section className="py-12 bg-gray-50">
+    <CategorySection handleNavigateToListingPage={handleNavigateToListingPage}/>
+      <section className="py-6 sm:py-8 lg:py-12">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8">
-            Shop by category
-          </h2>
-          <div className="flex justify-center gap-4">
-            {categoriesWithIcon.map((categoryItem) => (
-              <Card
-                key={categoryItem.id}
-                onClick={() =>
-                  handleNavigateToListingPage(categoryItem, "category")
-                }
-                className="cursor-pointer hover:shadow-lg transition-shadow w-[240px]"
-              >
-                <CardContent className="flex flex-col items-center justify-center p-6">
-                  <categoryItem.icon className="w-12 h-12 mb-4 text-primary" />
-                  <span className="font-bold">{categoryItem.label}</span>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8">
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-center mb-4 sm:mb-6 lg:mb-8">
             Feature Products
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {productList && productList.length > 0
               ? productList.map((productItem) => (
                   <ShoppingProductTile
@@ -226,6 +267,7 @@ function ShoppingHome() {
         setOpen={setOpenDetailsDialog}
         productDetails={productDetails}
       />
+      
     </div>
   );
 }

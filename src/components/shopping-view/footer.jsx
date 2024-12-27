@@ -83,7 +83,7 @@ function ShoppingFooter() {
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} Your Store. All rights reserved.
           </p>
-          <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+          <div className="flex items-center space-x-2 pb-10 text-sm text-muted-foreground">
             <span>Powered by</span>
             <Link 
               to="https://qodexcore.com" 

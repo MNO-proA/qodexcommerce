@@ -107,7 +107,7 @@ function AuthenticatedContent() {
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Avatar className="bg-black">
+          <Avatar className="bg-black cursor-pointer">
             <AvatarFallback className="bg-black text-white font-extrabold">
               {user?.userName[0].toUpperCase()}
             </AvatarFallback>
@@ -117,7 +117,7 @@ function AuthenticatedContent() {
           <DropdownMenuLabel>Logged in as {user?.userName}</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => navigate("/shop/account")}>
-            <UserCog className="mr-2 h-4 w-4" />
+            <UserCog className="mr-2 h-4 w-4 " />
             Account
           </DropdownMenuItem>
           <DropdownMenuSeparator />
@@ -142,12 +142,6 @@ function UnauthenticatedContent() {
       >
         Login
       </Button>
-      {/* <Button
-        onClick={() => navigate("/admin/dashboard")}
-        variant="outline"
-      >
-        Admin
-      </Button> */}
     </div>
   );
 }

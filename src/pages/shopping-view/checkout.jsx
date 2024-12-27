@@ -16,6 +16,7 @@ function ShoppingCheckout() {
   const [isPaymentStart, setIsPaymemntStart] = useState(false);
   const dispatch = useDispatch();
   const { toast } = useToast();
+ 
 
   console.log(currentSelectedAddress, "cartItems");
 
@@ -95,9 +96,6 @@ function ShoppingCheckout() {
   if (approvalURL) {
     window.location.href = approvalURL;
   }
-  // if (approvalURL) {
-  //   window.open(approvalURL, "_blank");
-  // }
 
   return (
     <div className="flex flex-col">
@@ -122,6 +120,7 @@ function ShoppingCheckout() {
             </div>
           </div>
           <div className="mt-4 w-full">
+              
             <Button className="w-full" onClick={handleInitiatePaystackPayment}>
               {isPaymentStart
                 ? "Processing Paystack Payment..."
