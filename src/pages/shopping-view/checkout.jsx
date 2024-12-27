@@ -7,6 +7,7 @@ import { useState } from "react";
 import { createNewOrder } from "@/store/shop/order-slice";
 import { Navigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
+import AnimatedLoader from "@/components/shopping-view/AnimateLoader";
 
 function ShoppingCheckout() {
   const { cartItems } = useSelector((state) => state.shopCart);
@@ -16,7 +17,7 @@ function ShoppingCheckout() {
   const [isPaymentStart, setIsPaymemntStart] = useState(false);
   const dispatch = useDispatch();
   const { toast } = useToast();
- 
+  const [isButtonLoading, setIsButtonLoading] = useState(false);
 
   console.log(currentSelectedAddress, "cartItems");
 
@@ -34,6 +35,7 @@ function ShoppingCheckout() {
       : 0;
 
   function handleInitiatePaystackPayment() {
+    setIsButtonLoading(true);
     if (cartItems.length === 0) {
       toast({
         title: "Your cart is empty. Please add items to proceed",
@@ -116,15 +118,18 @@ function ShoppingCheckout() {
           <div className="mt-8 space-y-4">
             <div className="flex justify-between">
               <span className="font-bold">Total</span>
-              <span className="font-bold">${totalCartAmount}</span>
+              <span className="font-bold">GHS {totalCartAmount}</span>
             </div>
           </div>
           <div className="mt-4 w-full">
-              
             <Button className="w-full" onClick={handleInitiatePaystackPayment}>
-              {isPaymentStart
-                ? "Processing Paystack Payment..."
-                : "Checkout with Paystack"}
+              {isButtonLoading && !isPaymentStart ? (
+                <AnimatedLoader />
+              ) : isPaymentStart ? (
+                "Processing Paystack Payment..."
+              ) : (
+                "Checkout with Paystack"
+              )}
             </Button>
           </div>
         </div>

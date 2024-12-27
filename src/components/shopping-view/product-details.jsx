@@ -573,11 +573,11 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
                   : ""
               }`}
             >
-              ${productDetails?.price}
+              GHS {productDetails?.price}
             </p>
             {productDetails?.salePrice > 0 ? (
               <p className="text-xl text-red-500 sm:text-2xl font-bold text-muted-foreground">
-                ${productDetails?.salePrice}
+                GHS {productDetails?.salePrice}
               </p>
             ) : null}
           </div>
